@@ -9,9 +9,8 @@ fetch('covid-19.json')
   covidData = data;
   if (typeof initDashboard === 'function') initDashboard();
   if (typeof populateFilter === 'function') populateFilter();
-});
-  });
-const COLORS = ['#3978f6', '#f05d5e', '#19a88a', '#9b6de0', '#e5a13b', '#36a6c8'];
+})
+  const COLORS = ['#3978f6', '#f05d5e', '#19a88a', '#9b6de0', '#e5a13b', '#36a6c8'];
 const numberFormat = new Intl.NumberFormat('en-US');
 const chartInstances = {};
 let covidData = null;
