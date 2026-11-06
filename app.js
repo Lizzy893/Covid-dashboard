@@ -1,9 +1,15 @@
 fetch('covid-19.json')
-  .then(r => r.json())
-  .then(data => {
-    console.log("JSON loaded:", data);
-    console.log("Total records:", data.length);
-    console.log("Loaded countries:", [...new Set(data.map(d => d.country))]);
+.then(r => r.json())
+.then(json => {
+  const countries = json.countries;
+  const data = countries.flatMap(c => c.data.map(row => ({ country: c.country, code: c.code, date: row.date, confirmed: row.confirmed, deaths: row.deaths, recovered: row.recovered })));
+  console.log("JSON loaded:", data);
+  console.log("Total records:", data.length);
+  console.log("Loaded countries:", [...new Set(data.map(d => d.country))]);
+  covidData = data;
+  if (typeof initDashboard === 'function') initDashboard();
+  if (typeof populateFilter === 'function') populateFilter();
+});
   });
 const COLORS = ['#3978f6', '#f05d5e', '#19a88a', '#9b6de0', '#e5a13b', '#36a6c8'];
 const numberFormat = new Intl.NumberFormat('en-US');
